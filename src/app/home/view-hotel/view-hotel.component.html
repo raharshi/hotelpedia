@@ -1,0 +1,14 @@
+<div class="container bg-light text-center" *ngIf="hotel != null; else loading">
+  <img [src]="hotel.img" alt="Hotel Photo" />
+
+  <h1 class="text-left text-monospace">{{ hotel.name }}</h1>
+  <h6 class="text-left text-monospace">{{ hotel.cuisine }}</h6>
+  <h6 class="text-left text-monospace">
+    {{ hotel.neighborhood }}
+  </h6>
+  <p class="d-flex align-items-center text-left text-monospace">
+    {{ hotel.operating_hours }}
+    <mat-icon class="ml-2">info</mat-icon>
+  </p>
+</div>
+<ng-template #loading> </ng-template>

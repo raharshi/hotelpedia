@@ -1,0 +1,53 @@
+<div class="container bg-light text-center border-dark p-5 mb-2">
+  <h1>Hotelpedia</h1>
+  <h3>Discover the best food & drinks in Hyderabad</h3>
+  <form
+    class="form-inline m-auto bg-white w-75 p-2 d-flex justify-content-around"
+  >
+    <select class="form-control" placeholder="City" aria-label="Search">
+      <option value="hyderabad">Hyderabad</option>
+      <option value="mumbai">Mumbai</option>
+      <option value="chennai">chennai</option>
+      <option value="bangalore">Bangalore</option>
+    </select>
+    <input
+      class="form-control w-50"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <button mat-icon-button class="w-20">
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+</div>
+<div class="container bg-light text-center border-dark p-5 mb-2">
+  <div class="d-flex flex-wrap">
+    <mat-card
+      *ngFor="let hotel of hotels"
+      class="hotel-card m-1 text-left"
+      (click)="viewHotel(hotel)"
+    >
+      <img mat-card-image [src]="hotel.img" alt="Hotel Photo" />
+      <mat-card-content>
+        <p class="d-flex align-items-center">
+          <mat-icon class="mr-1 text-danger">store_mall_directory</mat-icon
+          >{{ hotel.name }} since
+          <b> {{ hotel.year_established }}</b>
+        </p>
+        <p class="d-flex align-items-center">
+          <mat-icon class="mr-1 text-warning">fastfood</mat-icon
+          >{{ hotel.cuisine }}
+        </p>
+        <p class="d-flex align-items-center">
+          <mat-icon class="mr-1 text-success">location_on</mat-icon
+          >{{ hotel.neighborhood }}
+        </p>
+        <p class="d-flex align-items-center">
+          <mat-icon class="mr-1 text-info">alarm</mat-icon
+          >{{ hotel.operating_hours }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

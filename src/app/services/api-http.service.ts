@@ -1,43 +1,88 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { Constants } from '../config/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiHttpService {
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient, private constants: Constants) { }
 
-  public get = (url: string, options?: any): Observable<any> =>
-    this.http.get(url, options);
-
-  public post(url: string, data: any, options?: any): Observable<any> {
-    data = this.jsonToFormData(data);
-    return this.http.post(url, data, options);
+  private apiServer = this.constants.API_ENDPOINT;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
   }
 
-  public put = (url: string, data: any, options?: any): Observable<any> =>
-    this.http.put(url, data, options);
+  createHotel(hotel: any): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/hotels/', JSON.stringify(hotel), this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
 
-  public delete(url: string, options?: any): Observable<any> {
-    const opt = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }),
-      body: new HttpParams({ fromObject: options }),
+  createProfile(hotel: any): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/profiles/', JSON.stringify(hotel), this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+  getHotel(id: any): Observable<any> {
+    return this.httpClient.get<any>(this.apiServer + '/hotels/' + id)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+  getHotels(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.apiServer + '/hotels/')
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+  updateHotel(id: any, hotel: any): Observable<any> {
+    return this.httpClient.put<any>(this.apiServer + '/hotels/' + id, JSON.stringify(hotel), this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+  deleteHotel(id: any) {
+    return this.httpClient.delete<any>(this.apiServer + '/hotels/' + id, this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+  errorHandler(error: any) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    return this.http.delete(url, opt);
+    console.log(errorMessage);
+    return throwError(errorMessage);
   }
 
-  public jsonToFormData(item: any): FormData {
-    let formData = new FormData();
-    for (const key in item) {
-      if (key == 'images[]' || key == 'banners[]') {
-        for (const file in item[key]) {
-          formData.append(key, item[key][file]);
-        }
-      } else formData.append(key, item[key] ?? '');
-    }
-    return formData;
+  getCuisines(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.apiServer + '/cuisines/')
+      .pipe(
+        catchError(this.errorHandler)
+      )
   }
+
+  getNeighborhoods(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.apiServer + '/neighborhoods/')
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
 }

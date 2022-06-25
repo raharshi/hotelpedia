@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ApiEndpointsService } from './api-endpoints.service';
 import { ApiHttpService } from './api-http.service';
 
 @Injectable({
@@ -9,11 +8,10 @@ import { ApiHttpService } from './api-http.service';
 })
 export class HotelService {
 
-  constructor(private apiHttpService: ApiHttpService,
-    private apiEndpointsService: ApiEndpointsService) { }
+  constructor(private apiHttpService: ApiHttpService) { }
 
   getHotels(): Observable<any[]> {
-    return this.apiHttpService.get(this.apiEndpointsService.getHotels()).pipe(map((res: any) => {
+    return this.apiHttpService.getHotels().pipe(map((res: any) => {
       if (res) {
         return res;
       }
@@ -23,7 +21,7 @@ export class HotelService {
 
   getHotelById(id: any): Observable<any> {
     console.log(id);
-    return this.apiHttpService.get(this.apiEndpointsService.getHotelById(id)).pipe(map((res: any) => {
+    return this.apiHttpService.getHotel(id).pipe(map((res: any) => {
       if (res) {
         return res;
       }
@@ -32,7 +30,7 @@ export class HotelService {
   }
 
   getNeighborhoods(): Observable<any[]> {
-    return this.apiHttpService.get(this.apiEndpointsService.getNeighborhoods()).pipe(map((res: any) => {
+    return this.apiHttpService.getNeighborhoods().pipe(map((res: any) => {
       if (res) {
         return res;
       }
@@ -41,7 +39,25 @@ export class HotelService {
   };
 
   getCuisines(): Observable<any[]> {
-    return this.apiHttpService.get(this.apiEndpointsService.getCuisines()).pipe(map((res: any) => {
+    return this.apiHttpService.getCuisines().pipe(map((res: any) => {
+      if (res) {
+        return res;
+      }
+      else return null;
+    }))
+  };
+
+  createHotel(hotel: any): Observable<any[]> {
+    return this.apiHttpService.createHotel(hotel).pipe(map((res: any) => {
+      if (res) {
+        return res;
+      }
+      else return null;
+    }))
+  };
+
+  createProfile(profile: any): Observable<any[]> {
+    return this.apiHttpService.createProfile(profile).pipe(map((res: any) => {
       if (res) {
         return res;
       }

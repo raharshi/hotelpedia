@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { AmPmPipe } from './pipes/am-pm.pipe';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MatSelectModule } from '@angular/material/select';
     HomeComponent,
     CreateComponent,
     ViewHotelComponent,
-    SearchPipe
+    SearchPipe,
+    AmPmPipe
   ],
   imports: [
     BrowserModule,

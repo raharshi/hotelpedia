@@ -8,13 +8,14 @@
       <mat-form-field appearance="fill" floatLabel="always" class="w-50 p-2">
         <input
           matInput
+          type="number"
           placeholder="Year Established"
           formControlName="year_established"
         />
       </mat-form-field>
       <mat-form-field appearance="fill" floatLabel="always" class="w-50 p-2">
         <mat-select placeholder="Cuisine" formControlName="cuisine">
-          <mat-option *ngFor="let cuisine of cuisines" value="cuisine">{{
+          <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">{{
             cuisine
           }}</mat-option>
         </mat-select>
@@ -23,7 +24,7 @@
         <mat-select placeholder="Neighborhood" formControlName="neighborhood">
           <mat-option
             *ngFor="let neighborhood of neighborhoods"
-            value="neighborhood"
+            [value]="neighborhood"
             >{{ neighborhood }}</mat-option
           >
         </mat-select>
@@ -57,5 +58,13 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="createHotel()"
+    [disabled]="!hotelForm.valid"
+  >
+    Save
+  </button>
 </mat-dialog-actions>

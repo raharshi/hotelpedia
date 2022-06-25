@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 import { HotelService } from 'src/app/services/hotel.service';
 
 @Component({
@@ -14,10 +14,12 @@ export class CreateComponent implements OnInit {
     name: new FormControl('', Validators.required),
     neighborhood: new FormControl('', Validators.required),
     cuisine: new FormControl('', Validators.required),
-    fromTime: new FormControl('', Validators.required),
-    toTime: new FormControl('', Validators.required),
-    year_established: new FormControl('', Validators.required),
-    img: new FormControl('', Validators.required),
+    from_time: new FormControl('', Validators.required),
+    to_time: new FormControl('', Validators.required),
+    operating_hours: new FormControl(''),
+    year_established: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(5)]),
+    img: new FormControl(''),
+    reviews: new FormControl('')
   });
 
   neighborhoods!: any[];
@@ -37,6 +39,18 @@ export class CreateComponent implements OnInit {
       this.cuisines = res;
       this.hotelForm.get('cuisine')?.setValue(this.cuisines[0]);
     })
+  }
+
+  createHotel() {
+    let num = Math.floor(Math.random() * (7 - 1 + 1)) + 1;
+    this.hotelForm.get('img')?.setValue('../../assets/images/hotel' + num + ".jpg");
+    this.hotelForm.get('operating_hours')?.setValue(this.hotelForm.get('from_time')?.value + " - " + this.hotelForm.get('to_time')?.value)
+    console.log(this.hotelForm.value);
+
+    this.hotelService.createHotel(this.hotelForm.value).subscribe((res) => {
+      console.log(res);
+    })
+
   }
 
 }

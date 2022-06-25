@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateComponent } from '../home/create/create.component';
 import { HomeComponent } from '../home/home.component';
+import { SharedService } from '../services/shared.service';
 
 
 @Component({
@@ -12,8 +13,7 @@ import { HomeComponent } from '../home/home.component';
 })
 export class NavbarComponent implements OnInit {
 
-  @ViewChild(HomeComponent, { static: true }) home!: HomeComponent;
-  constructor(private router: Router, public dialog: MatDialog) { }
+  constructor(private router: Router, public dialog: MatDialog, private sharedService: SharedService) { }
 
   ngOnInit(): void {
 
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       if (result)
-        this.home.getHotels();
+        this.sharedService.refreshHotels();
     });
   }
 

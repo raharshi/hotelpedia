@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HotelService } from '../services/hotel.service';
 import { FormControl } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,13 @@ export class HomeComponent implements OnInit {
   ]
 
   city = new FormControl(this.neighborhoods[0]);
-  constructor(private hotelService: HotelService, private router: Router, private spinner: NgxSpinnerService) { }
+  constructor(private hotelService: HotelService, private router: Router, private spinner: NgxSpinnerService, private sharedService: SharedService) {
+    this.sharedService.doRefresh().subscribe((res) => {
+      if (res) {
+        this.getHotels();
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.getHotels();

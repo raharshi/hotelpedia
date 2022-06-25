@@ -1,1 +1,61 @@
-<p>create works!</p>
+<h2 mat-dialog-title class="text-monospace font-weight-bold">Create Hotel</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="my-2 w-100 p-5">
+    <form [formGroup]="hotelForm" class="d-flex flex-wrap">
+      <mat-form-field appearance="fill" floatLabel="always" class="w-50 p-2">
+        <input matInput placeholder="Hotel Name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always" class="w-50 p-2">
+        <input
+          matInput
+          placeholder="Year Established"
+          formControlName="year_established"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always" class="w-50 p-2">
+        <mat-select placeholder="Cuisine" formControlName="cuisine">
+          <mat-option *ngFor="let cuisine of cuisines" value="cuisine">{{
+            cuisine
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always" class="w-50 p-2">
+        <mat-select placeholder="Neighborhood" formControlName="neighborhood">
+          <mat-option
+            *ngFor="let neighborhood of neighborhoods"
+            value="neighborhood"
+            >{{ neighborhood }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        appearance="standard"
+        floatLabel="always"
+        class="w-50 p-2"
+      >
+        <input
+          matInput
+          type="time"
+          placeholder="From Time"
+          formControlName="from_time"
+        />
+      </mat-form-field>
+      <mat-form-field
+        appearance="standard"
+        floatLabel="always"
+        class="w-50 p-2"
+      >
+        <input
+          matInput
+          type="time"
+          placeholder="To Time"
+          formControlName="to_time"
+        />
+      </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

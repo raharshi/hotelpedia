@@ -1,35 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Hotelpedia</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between"
+>
+  <a
+    class="navbar-brand text-monospace font-weight-bold"
+    [routerLink]="['hotels']"
+    routerLinkActive="active"
+    >Hotelpedia</a
   >
-    <span class="navbar-toggler-icon"></span>
+  <button mat-icon-button aria-label="add hotel" (click)="createHotel()">
+    <mat-icon>playlist_add</mat-icon>
   </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['hotels']" routerLinkActive="active"
-          >Home <span class="sr-only">(current)</span></a
-        >
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Search
-      </button>
-    </form>
-  </div>
 </nav>

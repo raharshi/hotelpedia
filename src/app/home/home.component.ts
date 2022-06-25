@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HotelService } from '../services/hotel.service';
+import { FormControl } from '@angular/forms';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-home',
@@ -9,16 +11,34 @@ import { HotelService } from '../services/hotel.service';
 })
 export class HomeComponent implements OnInit {
   public hotels!: any[];
-  constructor(private hotelService: HotelService, private router: Router) { }
+
+  search = new FormControl('');
+
+
+  neighborhoods: any[] = [
+    "White Plains",
+    "Utica",
+    "New York",
+    "Albany",
+    "New Rochelle",
+    "Syracuse",
+    "Rochester",
+    "Buffalo",
+  ]
+
+  city = new FormControl(this.neighborhoods[0]);
+  constructor(private hotelService: HotelService, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getHotels();
   }
 
   getHotels(): void {
+    this.spinner.show();
     this.hotelService.getHotels().subscribe((res) => {
       console.log(res);
       this.hotels = res;
+      this.spinner.hide();
     });
   }
 

@@ -1,7 +1,7 @@
-<div class="container bg-light text-center" *ngIf="hotel != null; else loading">
+<div class="container bg-light text-center" *ngIf="hotel != null; else noData">
   <img [src]="hotel.img" alt="Hotel Photo" />
 
-  <h1 class="text-left text-monospace">{{ hotel.name }}</h1>
+  <h1 class="text-left text-monospace">{{ hotel.name | uppercase }}</h1>
   <h6 class="text-left text-monospace">{{ hotel.cuisine }}</h6>
   <h6 class="text-left text-monospace">
     {{ hotel.neighborhood }}
@@ -11,4 +11,13 @@
     <mat-icon class="ml-2">info</mat-icon>
   </p>
 </div>
-<ng-template #loading> </ng-template>
+
+<!-- No Data -->
+<ng-template #noData>
+  <h2
+    class="d-flex justify-content-center align-items-center m-4 w-100"
+    style="height: 400px"
+  >
+    No Data Found
+  </h2>
+</ng-template>

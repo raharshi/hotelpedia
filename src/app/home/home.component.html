@@ -1,38 +1,48 @@
-<div class="container bg-light text-center border-dark p-5 mb-2">
-  <h1>Hotelpedia</h1>
-  <h3>Discover the best food & drinks in Hyderabad</h3>
+<div class="hp-bg text-center p-5">
+  <h1 class="text-white text-monospace font-weight-bold">Hotelpedia</h1>
+  <h3 class="text-white text-monospace">
+    Discover the best food & drinks in Hyderabad
+  </h3>
   <form
-    class="form-inline m-auto bg-white w-75 p-2 d-flex justify-content-around"
+    class="form-inline m-auto bg-white w-50 p-2 d-flex justify-content-around"
   >
-    <select class="form-control" placeholder="City" aria-label="Search">
-      <option value="hyderabad">Hyderabad</option>
-      <option value="mumbai">Mumbai</option>
-      <option value="chennai">chennai</option>
-      <option value="bangalore">Bangalore</option>
+    <mat-icon class="text-danger">location_on</mat-icon>
+    <select
+      class="form-control"
+      placeholder="City"
+      aria-label="Search"
+      [formControl]="city"
+    >
+      <option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood">
+        {{ neighborhood }}
+      </option>
     </select>
     <input
-      class="form-control w-50"
+      class="form-control w-75"
       type="search"
       placeholder="Search"
       aria-label="Search"
+      [formControl]="search"
     />
-    <button mat-icon-button class="w-20">
-      <mat-icon>search</mat-icon>
-    </button>
   </form>
 </div>
+
 <div class="container bg-light text-center border-dark p-5 mb-2">
-  <div class="d-flex flex-wrap">
+  <!-- Hotels List -->
+  <div
+    class="d-flex flex-wrap"
+    *ngIf="hotels != null && hotels.length > 0; else noData"
+  >
     <mat-card
-      *ngFor="let hotel of hotels"
       class="hotel-card m-1 text-left"
+      *ngFor="let hotel of hotels | search: [search.value, city.value]"
       (click)="viewHotel(hotel)"
     >
       <img mat-card-image [src]="hotel.img" alt="Hotel Photo" />
       <mat-card-content>
         <p class="d-flex align-items-center">
           <mat-icon class="mr-1 text-danger">store_mall_directory</mat-icon
-          >{{ hotel.name }} since
+          >{{ hotel.name | uppercase }} since
           <b> {{ hotel.year_established }}</b>
         </p>
         <p class="d-flex align-items-center">
@@ -50,4 +60,14 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+  <!-- No Data -->
+  <ng-template #noData>
+    <h2
+      class="d-flex justify-content-center align-items-center m-4 w-100"
+      style="height: 400px"
+    >
+      No Data Found
+    </h2>
+  </ng-template>
 </div>

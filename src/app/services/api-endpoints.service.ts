@@ -55,6 +55,8 @@ export class ApiEndpointsService {
   // getHotels = (): string => this.createUrl('hotels');
 
   getHotels = (): string => this.constants.API_ENDPOINT + '/hotels';
+  getNeighborhoods = (): string => this.constants.API_ENDPOINT + '/neighborhoods';
+  getCuisines = (): string => this.constants.API_ENDPOINT + '/cuisines';
 
   getHotelById(id: any): string {
     return this.constants.API_ENDPOINT + '/hotels/' + id;

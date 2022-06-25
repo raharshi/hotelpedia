@@ -30,4 +30,22 @@ export class HotelService {
       else return null;
     }))
   }
+
+  getNeighborhoods(): Observable<any[]> {
+    return this.apiHttpService.get(this.apiEndpointsService.getNeighborhoods()).pipe(map((res: any) => {
+      if (res) {
+        return res;
+      }
+      else return null;
+    }))
+  };
+
+  getCuisines(): Observable<any[]> {
+    return this.apiHttpService.get(this.apiEndpointsService.getCuisines()).pipe(map((res: any) => {
+      if (res) {
+        return res;
+      }
+      else return null;
+    }))
+  };
 }

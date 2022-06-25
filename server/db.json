@@ -39,20 +39,6 @@
       "id": 3,
       "userId": 3,
       "job": "Manager"
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "userId": 4,
-      "job": "dev",
-      "id": 7
     }
   ],
   "products": [
@@ -887,42 +873,6 @@
           }
         }
       ]
-    },
-    {
-      "id": 17
-    },
-    {
-      "id": 18
-    },
-    {
-      "id": 19
-    },
-    {
-      "id": 20
-    },
-    {
-      "id": 21,
-      "name": "Rishi",
-      "neighborhood": "Albany",
-      "cuisine": "African",
-      "from_time": "00:40",
-      "to_time": "13:41",
-      "operating_hours": "00:40 - 13:41",
-      "year_established": 1995,
-      "img": "../../assets/images/hotel1",
-      "reviews": ""
-    },
-    {
-      "id": 22,
-      "name": "Rishi2",
-      "neighborhood": "Albany",
-      "cuisine": "African",
-      "from_time": "00:43",
-      "to_time": "13:44",
-      "operating_hours": "00:43 - 13:44",
-      "year_established": 1995,
-      "img": "../../assets/images/hotel7.jpg",
-      "reviews": ""
     }
   ],
   "neighborhoods": [

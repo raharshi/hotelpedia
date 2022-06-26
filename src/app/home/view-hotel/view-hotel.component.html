@@ -1,17 +1,36 @@
-<div class="container bg-light text-center" *ngIf="hotel != null; else noData">
+<div
+  class="container bg-light text-left text-monospace mb-2 pb-3"
+  *ngIf="hotel != null; else noData"
+>
   <img [src]="hotel.img" alt="Hotel Photo" />
 
-  <h1 class="text-left text-monospace">{{ hotel.name | uppercase }}</h1>
-  <h6 class="text-left text-monospace">{{ hotel.cuisine }}</h6>
-  <h6 class="text-left text-monospace">
+  <h1>{{ hotel.name | uppercase }}</h1>
+  <h6>{{ hotel.cuisine }}</h6>
+  <h6>
     {{ hotel.neighborhood }}
   </h6>
-  <p class="d-flex align-items-center text-left text-monospace">
+  <p class="d-flex align-items-center">
     {{ hotel.operating_hours }}
     <mat-icon class="ml-2">info</mat-icon>
   </p>
-</div>
 
+  <button mat-raised-button class="black-btn">
+    <mat-icon>star</mat-icon>Add Review
+  </button>
+</div>
+<div
+  class="container bg-light text-left"
+  *ngIf="hotel?.reviews != null && hotel?.reviews?.length > 0"
+>
+  <div *ngFor="let review of hotel?.reviews" class="review p-3">
+    <b id="name">{{ review.name }}</b>
+    <p id="rating">
+      rating: <b>{{ review.rating }}</b>
+    </p>
+    <p class="text-monospace" id="date">{{ review.date }}</p>
+    <p id="comment">{{ review.comment?.body }}</p>
+  </div>
+</div>
 <!-- No Data -->
 <ng-template #noData>
   <h2

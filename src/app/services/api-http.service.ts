@@ -24,6 +24,13 @@ export class ApiHttpService {
       )
   }
 
+  udpateHotel(id: any, hotel: any): Observable<any> {
+    return this.httpClient.put<any>(this.apiServer + '/hotels/' + id, JSON.stringify(hotel), this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
   createProfile(hotel: any): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/profiles/', JSON.stringify(hotel), this.httpOptions)
       .pipe(

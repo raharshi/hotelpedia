@@ -2,10 +2,10 @@
   class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between"
 >
   <a
-    class="navbar-brand text-monospace font-weight-bold"
+    class="navbar-brand text-monospace font-weight-bold d-flex align-items-center"
     [routerLink]="['hotels']"
     routerLinkActive="active"
-    >Hotelpedia</a
+    ><mat-icon class="mr-1">store_mall_directory</mat-icon>Hotelpedia</a
   >
   <button mat-icon-button aria-label="add hotel" (click)="createHotel()">
     <mat-icon>playlist_add</mat-icon>

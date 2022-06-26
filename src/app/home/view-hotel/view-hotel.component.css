@@ -14,3 +14,20 @@ img{
     font-size: 12px;
     color: grey;
 }
+  .rating-list li {
+      float: right;
+      color: #ddd;
+      padding: 2px;
+
+  }
+
+  .rating-list li:hover,
+  .rating-list li:hover~li,
+  .rating-list li.selected {
+      color: #ffd700;
+  }
+
+  .rating-list {
+      display: inline-block;
+      list-style: none;
+  }

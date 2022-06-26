@@ -1,1 +1,46 @@
-<p>review works!</p>
+<h2 mat-dialog-title class="text-monospace font-weight-bold">Review</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="my-2 w-100 p-5">
+    <form [formGroup]="reviewForm" class="d-flex flex-wrap">
+      <div>
+        <ul
+          class="list-inline rating-list"
+          *ngFor="let star of stars"
+          style="display: inline-block"
+        >
+          <li
+            (click)="countStar(star)"
+            [ngClass]="{ selected: star <= selected }"
+          >
+            <mat-icon>star</mat-icon>
+            <!-- <i class="fa fa-star"></i> -->
+          </li>
+        </ul>
+      </div>
+
+      <mat-form-field appearance="fill" floatLabel="always">
+        <input matInput placeholder="User Name" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" floatLabel="always">
+        <textarea
+          matInput
+          type="text"
+          placeholder="Comment"
+          formControlName="comment"
+        ></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    (click)="review()"
+    [disabled]="!reviewForm.valid"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

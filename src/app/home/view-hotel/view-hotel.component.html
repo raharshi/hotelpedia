@@ -10,11 +10,11 @@
     {{ hotel.neighborhood }}
   </h6>
   <p class="d-flex align-items-center">
-    {{ hotel.operating_hours }}
+    {{ hotel.operating_hours | amPm }}
     <mat-icon class="ml-2">info</mat-icon>
   </p>
 
-  <button mat-raised-button class="black-btn">
+  <button mat-raised-button class="black-btn" (click)="reviewHotel()">
     <mat-icon>star</mat-icon>Add Review
   </button>
 </div>
@@ -24,10 +24,18 @@
 >
   <div *ngFor="let review of hotel?.reviews" class="review p-3">
     <b id="name">{{ review.name }}</b>
-    <p id="rating">
-      rating: <b>{{ review.rating }}</b>
-    </p>
     <p class="text-monospace" id="date">{{ review.date }}</p>
+    <div>
+      <ul
+        class="list-inline rating-list m-0 p-0"
+        *ngFor="let star of stars"
+        style="display: inline-block"
+      >
+        <li [ngClass]="{ selected: star <= review?.rating }">
+          <mat-icon>star</mat-icon>
+        </li>
+      </ul>
+    </div>
     <p id="comment">{{ review.comment?.body }}</p>
   </div>
 </div>

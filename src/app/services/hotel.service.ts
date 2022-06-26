@@ -56,6 +56,15 @@ export class HotelService {
     }))
   };
 
+  updateHotel(id: any, hotel: any): Observable<any[]> {
+    return this.apiHttpService.updateHotel(id, hotel).pipe(map((res: any) => {
+      if (res) {
+        return res;
+      }
+      else return null;
+    }))
+  };
+
   createProfile(profile: any): Observable<any[]> {
     return this.apiHttpService.createProfile(profile).pipe(map((res: any) => {
       if (res) {
